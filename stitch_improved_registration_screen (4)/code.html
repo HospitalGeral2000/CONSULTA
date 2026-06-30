@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Hospital Digital - Dashboard do Paciente</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-low": "#eff4ff",
+                    "secondary": "#006a63",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed": "#171c1f",
+                    "outline": "#727783",
+                    "surface-tint": "#005db6",
+                    "on-secondary-fixed": "#00201d",
+                    "inverse-surface": "#213145",
+                    "on-error": "#ffffff",
+                    "secondary-container": "#79f3e7",
+                    "surface-container": "#e5eeff",
+                    "tertiary-fixed": "#dfe3e7",
+                    "on-surface-variant": "#424752",
+                    "surface-container-lowest": "#ffffff",
+                    "on-background": "#0b1c30",
+                    "primary-fixed-dim": "#a9c7ff",
+                    "on-tertiary-fixed-variant": "#43474b",
+                    "on-primary-container": "#c8daff",
+                    "outline-variant": "#c2c6d4",
+                    "surface-variant": "#d3e4fe",
+                    "secondary-fixed": "#7cf6ea",
+                    "surface-container-high": "#dce9ff",
+                    "on-secondary-fixed-variant": "#00504a",
+                    "on-secondary-container": "#006f67",
+                    "tertiary-container": "#5b6063",
+                    "surface-container-highest": "#d3e4fe",
+                    "on-primary-fixed-variant": "#00468c",
+                    "surface": "#f8f9ff",
+                    "primary-container": "#005eb8",
+                    "on-primary": "#ffffff",
+                    "primary": "#00478d",
+                    "error-container": "#ffdad6",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed-dim": "#c3c7cb",
+                    "surface-dim": "#cbdbf5",
+                    "on-secondary": "#ffffff",
+                    "surface-bright": "#f8f9ff",
+                    "inverse-primary": "#a9c7ff",
+                    "inverse-on-surface": "#eaf1ff",
+                    "on-tertiary-container": "#d6dade",
+                    "error": "#ba1a1a",
+                    "primary-fixed": "#d6e3ff",
+                    "on-primary-fixed": "#001b3d",
+                    "secondary-fixed-dim": "#5ddacd",
+                    "on-surface": "#0b1c30",
+                    "background": "#f8f9ff",
+                    "tertiary": "#43484c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "12px",
+                    "base": "8px",
+                    "xs": "4px",
+                    "xl": "80px",
+                    "container-max": "1280px",
+                    "gutter": "24px",
+                    "md": "24px",
+                    "lg": "48px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Plus Jakarta Sans"],
+                    "body-md": ["Inter"],
+                    "headline-xl": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "body-sm": ["Inter"],
+                    "label-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        .font-headline-md { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex">
+<!-- Sidebar Navigation -->
+<aside class="hidden md:flex flex-col h-screen py-md border-r border-outline-variant bg-surface-container-low w-64 fixed left-0 top-0 z-50">
+<div class="px-md mb-lg">
+<h1 class="font-headline-md text-headline-md text-primary font-bold">Hospital Digital</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Central do Paciente</p>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 py-3 px-4 bg-primary-container text-on-primary-container font-bold rounded-lg mx-2 transition-transform active:translate-x-1" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Painel</span>
+</a>
+<a class="flex items-center gap-3 py-3 px-4 text-on-surface-variant hover:bg-surface-container-high rounded-lg mx-2 transition-all" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-label-md text-label-md">Minhas Consultas</span>
+</a>
+<a class="flex items-center gap-3 py-3 px-4 text-on-surface-variant hover:bg-surface-container-high rounded-lg mx-2 transition-all" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md">Exames &amp; Receitas</span>
+</a>
+<a class="flex items-center gap-3 py-3 px-4 text-on-surface-variant hover:bg-surface-container-high rounded-lg mx-2 transition-all" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-md text-label-md">Histórico</span>
+</a>
+</nav>
+<div class="px-md mt-auto pt-md border-t border-outline-variant">
+<div class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-container-high transition-all cursor-pointer">
+<img class="w-10 h-10 rounded-full border-2 border-primary-container object-cover" data-alt="A professional close-up portrait of a middle-aged man with a friendly expression, wearing a casual light blue shirt, set against a blurred modern clinical office background. The lighting is bright and natural, reinforcing a sense of trust and well-being within a high-end hospital digital interface. The aesthetic is clean and minimal." src="https://lh3.googleusercontent.com/aida-public/AB6AXuACTsZz9YuWxoazM0_TRIwtC4VPuAW617ex2rZEBI8ET-C4tXk6drSH_Bl5oWiHOAnUfQqNanEgllchA87uqcNnNXzL20g-Q-Jq_0U-NvjgeLbEdnumeJeT_SMQue67wG5z9qL52SYY2fqMfDKfty39fuT1qOak64tEhDudQIIoG-hzI5Nz_4HcOfLUP3IBLYHJKw92FaT1mBVUaI8pu47pGZlyYoF2ZSGUd_gn7TarzYCOhqwbPrFGGg"/>
+<div class="overflow-hidden">
+<p class="font-label-md text-label-md text-on-surface truncate">Ricardo Oliveira</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">ID: 4492-0</p>
+</div>
+</div>
+<a class="flex items-center gap-3 py-3 px-4 mt-4 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Configurações</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 min-h-screen">
+<!-- Top Nav Bar -->
+<header class="flex justify-between items-center w-full px-md md:px-lg h-20 bg-surface border-b border-outline-variant sticky top-0 z-40">
+<div class="flex items-center gap-4">
+<button class="md:hidden p-2 text-on-surface-variant">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h2 class="font-headline-md text-headline-md font-bold text-primary">Olá, Ricardo!</h2>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-body-sm">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-full text-body-sm focus:ring-2 focus:ring-primary-container focus:outline-none w-64 transition-all" placeholder="Buscar especialista ou exame..." type="text"/>
+</div>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full relative transition-all">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<div class="h-8 w-[1px] bg-outline-variant mx-2"></div>
+<button class="hidden md:flex bg-primary text-on-primary px-6 py-2.5 rounded-lg font-label-md text-label-md shadow-sm hover:opacity-90 active:scale-95 transition-all">
+                    Marcar Consulta
+                </button>
+</div>
+</header>
+<div class="p-md md:p-lg space-y-lg max-w-container-max mx-auto">
+<!-- Quick Stats Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Next Appointment -->
+<div class="bg-white p-6 rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1.5 h-full bg-primary"></div>
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-surface-container-low rounded-lg">
+<span class="material-symbols-outlined text-primary">event</span>
+</div>
+<span class="bg-surface-container-high text-on-secondary-container px-3 py-1 rounded-full text-label-sm">Hoje</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-1">Próxima Consulta</p>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">14:30</h3>
+<p class="font-label-md text-label-md text-primary">Dr. Adriano Santos</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Cardiologia • Telemedicina</p>
+</div>
+<!-- Pending Results -->
+<div class="bg-white p-6 rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-shadow group">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-surface-container-low rounded-lg">
+<span class="material-symbols-outlined text-primary">lab_research</span>
+</div>
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-label-sm">2 novos</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-1">Resultados Pendentes</p>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Exames de Sangue</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Disponível para visualização desde às 09:00</p>
+<a class="inline-block mt-4 font-label-md text-label-md text-primary hover:underline" href="#">Ver resultados</a>
+</div>
+<!-- Active Prescriptions -->
+<div class="bg-white p-6 rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-shadow group">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-surface-container-low rounded-lg">
+<span class="material-symbols-outlined text-primary">prescriptions</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-1">Prescrições Ativas</p>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">3 Medicamentos</h3>
+<div class="flex -space-x-2 mt-4">
+<div class="w-8 h-8 rounded-full bg-surface-variant border-2 border-white flex items-center justify-center text-[10px] font-bold">AZ</div>
+<div class="w-8 h-8 rounded-full bg-surface-container-high border-2 border-white flex items-center justify-center text-[10px] font-bold">LX</div>
+<div class="w-8 h-8 rounded-full bg-primary-fixed border-2 border-white flex items-center justify-center text-[10px] font-bold">+1</div>
+</div>
+<a class="inline-block mt-4 font-label-md text-label-md text-primary hover:underline" href="#">Baixar PDF</a>
+</div>
+</section>
+<!-- Main Agenda Section -->
+<section class="space-y-md">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-md text-headline-md text-on-surface">Minha Agenda</h2>
+<button class="text-primary font-label-md text-label-md hover:opacity-80 flex items-center gap-2">
+                        Ver histórico completo <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<div class="bg-white rounded-xl border border-outline-variant shadow-sm overflow-hidden">
+<!-- Table-like layout for appointments -->
+<div class="divide-y divide-outline-variant">
+<!-- Appointment 1: Active Today -->
+<div class="p-6 flex flex-col md:flex-row md:items-center gap-6 bg-surface-container-low/30">
+<div class="flex items-center gap-4 min-w-[240px]">
+<img class="w-14 h-14 rounded-full object-cover" data-alt="A portrait of a male doctor in a white lab coat, wearing glasses and a stethoscope around his neck. He has a calm, trustworthy demeanor and is set against a clean, minimal medical background with soft blue tones. The lighting is bright and professional, following the modern corporate style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQs2qcQgmIpmQiXVpOr4mmJ68r-3z2Y0TIXoMeVIPhfbYKmGCwnVZ8e63RC1zRkjjXF6q3e0vb0ykXC8phyybaPND4en7J6iJecx3jhISTPWCy1UqoEcQXol7gToO6oIcWOewuIeEhSArOGCmBffRNvyatB5tJlsSF3D4GxzyvhKHDYVWS5FQFawOF608CMVl-rZEJbyN2N57KWMl3TJEXyw5oLwXN1i76DSpUNgV5zNuPX58FCmuQ8g"/>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface">Dr. Adriano Santos</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Cardiologia</p>
+</div>
+</div>
+<div class="flex-1 grid grid-cols-2 md:grid-cols-3 gap-4">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Data e Hora</p>
+<p class="font-body-md text-body-md text-on-surface font-semibold">Hoje, 14:30</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Tipo</p>
+<div class="flex items-center gap-1 text-secondary">
+<span class="material-symbols-outlined text-sm">videocam</span>
+<span class="font-body-md text-body-md font-medium">Teleconsulta</span>
+</div>
+</div>
+<div class="hidden md:block">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Status</p>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 bg-secondary rounded-full"></span>
+<span class="font-body-md text-body-md text-on-surface">Confirmada</span>
+</div>
+</div>
+</div>
+<div class="flex md:justify-end">
+<button class="w-full md:w-auto bg-secondary text-on-secondary px-8 py-3 rounded-lg font-label-md text-label-md flex items-center justify-center gap-2 hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined">login</span>
+                                    Entrar na Sala
+                                </button>
+</div>
+</div>
+<!-- Appointment 2 -->
+<div class="p-6 flex flex-col md:flex-row md:items-center gap-6 hover:bg-surface transition-colors">
+<div class="flex items-center gap-4 min-w-[240px]">
+<img class="w-14 h-14 rounded-full object-cover" data-alt="A portrait of a female doctor with dark hair pulled back, wearing a white medical coat. She is smiling gently at the camera, conveying empathy and expertise. The background is a clean, bright hospital interior with soft bokeh and primary blue accents. High-quality corporate photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCS7wEBLKF03WQPxsJ_Nhok0MbPDXzC7XORHdoYV5_QCgaphkjviXnGW4cOYRqIAX9ui524L_pOjTnzacleRfmry6L6rHVXijDmbEjVgOsE1EUiLLSeuB5d5fio2tHo8f48_w9VPLCv0cJqnPSbi39Jzfk2gk3tc-EEOU9cuDNZJZuGDsuI6N9S2FFtgpB5p-1eCrWmwHBl2nvbXcQB1Bwy5qsNHfohBM4rg4XcpF2tBG0zBgz-1m4QUw"/>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface">Dra. Beatriz Lima</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Dermatologia</p>
+</div>
+</div>
+<div class="flex-1 grid grid-cols-2 md:grid-cols-3 gap-4">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Data e Hora</p>
+<p class="font-body-md text-body-md text-on-surface font-semibold">Quarta, 22 Mai • 09:00</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Tipo</p>
+<div class="flex items-center gap-1 text-on-surface">
+<span class="material-symbols-outlined text-sm text-on-surface-variant">location_on</span>
+<span class="font-body-md text-body-md font-medium">Presencial</span>
+</div>
+</div>
+<div class="hidden md:block">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Status</p>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 bg-secondary rounded-full"></span>
+<span class="font-body-md text-body-md text-on-surface">Confirmada</span>
+</div>
+</div>
+</div>
+<div class="flex md:justify-end gap-2">
+<button class="flex-1 md:flex-none border border-outline text-on-surface-variant px-6 py-3 rounded-lg font-label-md text-label-md hover:bg-surface-container-high transition-all">
+                                    Reagendar
+                                </button>
+<button class="p-3 border border-outline text-on-surface-variant rounded-lg hover:bg-surface-container-high transition-all">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Appointment 3 -->
+<div class="p-6 flex flex-col md:flex-row md:items-center gap-6 hover:bg-surface transition-colors">
+<div class="flex items-center gap-4 min-w-[240px]">
+<img class="w-14 h-14 rounded-full object-cover" data-alt="A portrait of a male specialist doctor in his 40s, with a clean-shaven face and short hair, wearing a white medical uniform. He looks professional and ready to help. The lighting is bright and even, against a minimal white background with subtle blue geometric shapes. Corporate health aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbZmQ_l35Rcw81HT4JAn2CbBSJ7CHUdJvu_KQtk94VxZxiVtCU_yHoHfmJ1-9RJK5a7Q1QsBxYBHQbRTI4nDEKtOektRIh3Nza2SUKsZ350CulS9s_QbV5eqi1pOG68n64uged-_EVuO3ahctkBy5bjCdapABULIE01E88lZWiN1GbtEPhrk-uMbhD12JQ4EJuTmhAQPuZBodvaajVHO5C_OLXz6fyQdmw4b-dtZCQAtt4S_QIsjNHFw"/>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface">Dr. Carlos Mendes</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Ortopedia</p>
+</div>
+</div>
+<div class="flex-1 grid grid-cols-2 md:grid-cols-3 gap-4">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Data e Hora</p>
+<p class="font-body-md text-body-md text-on-surface font-semibold">Sexta, 24 Mai • 16:15</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Tipo</p>
+<div class="flex items-center gap-1 text-secondary">
+<span class="material-symbols-outlined text-sm">videocam</span>
+<span class="font-body-md text-body-md font-medium">Teleconsulta</span>
+</div>
+</div>
+<div class="hidden md:block">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Status</p>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 bg-outline rounded-full"></span>
+<span class="font-body-md text-body-md text-on-surface">Aguardando</span>
+</div>
+</div>
+</div>
+<div class="flex md:justify-end gap-2">
+<button class="flex-1 md:flex-none border border-outline text-on-surface-variant px-6 py-3 rounded-lg font-label-md text-label-md hover:bg-surface-container-high transition-all">
+                                    Reagendar
+                                </button>
+<button class="p-3 border border-outline text-on-surface-variant rounded-lg hover:bg-surface-container-high transition-all">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Health Reminders / Cards Section -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="bg-surface-container text-on-surface p-8 rounded-2xl relative overflow-hidden">
+<div class="relative z-10">
+<h3 class="font-headline-md text-headline-md mb-2">Check-up Preventivo</h3>
+<p class="font-body-md text-body-md mb-6 max-w-sm">Você ainda não realizou seus exames anuais este ano. Que tal agendar agora?</p>
+<button class="bg-primary text-on-primary px-8 py-3 rounded-lg font-label-md text-label-md shadow-lg hover:opacity-90 transition-all">
+                            Agendar Check-up
+                        </button>
+</div>
+<span class="material-symbols-outlined absolute -bottom-4 -right-4 text-[160px] opacity-10 rotate-12">health_and_safety</span>
+</div>
+<div class="bg-inverse-surface text-inverse-on-surface p-8 rounded-2xl flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-secondary-fixed">tips_and_updates</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary-fixed">Dica de Saúde</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-2">Mantenha a hidratação</h3>
+<p class="font-body-md text-body-md opacity-80">Beber pelo menos 2L de água por dia ajuda na regulação térmica e funcionamento renal.</p>
+</div>
+<div class="mt-6 flex items-center gap-4">
+<div class="flex-1 bg-white/10 h-2 rounded-full overflow-hidden">
+<div class="bg-secondary-fixed h-full w-[65%]"></div>
+</div>
+<span class="font-label-md text-label-md">1.3L / 2L</span>
+</div>
+</div>
+</section>
+</div>
+<footer class="w-full py-lg px-md md:px-lg max-w-container-max mx-auto flex flex-col md:flex-row justify-between border-t border-outline-variant mt-xl text-on-surface-variant">
+<div class="mb-md md:mb-0">
+<h2 class="font-headline-md text-headline-md text-primary font-bold mb-2">Hospital Digital</h2>
+<p class="font-body-sm text-body-sm">© 2024 Hospital Digital. Todos os direitos reservados.</p>
+</div>
+<div class="flex flex-col md:flex-row gap-6 md:gap-lg">
+<div class="space-y-2">
+<p class="font-label-md text-label-md text-on-surface">Institucional</p>
+<ul class="space-y-1 font-body-sm text-body-sm">
+<li><a class="hover:text-primary transition-colors" href="#">Sobre Nós</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Termos de Uso</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Privacidade</a></li>
+</ul>
+</div>
+<div class="space-y-2">
+<p class="font-label-md text-label-md text-on-surface">Contato</p>
+<ul class="space-y-1 font-body-sm text-body-sm">
+<li>(11) 9999-9999</li>
+<li>suporte@hospitaldigital.com</li>
+<li>Ouvidoria: 0800-123-456</li>
+</ul>
+</div>
+</div>
+</footer>
+</main>
+<!-- Mobile Navigation Bar (Fixed Bottom) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-surface border-t border-outline-variant flex justify-around py-3 px-4 z-50">
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-sm text-[10px]">Painel</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-label-sm text-[10px]">Agenda</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">add_circle</span>
+<span class="font-label-sm text-[10px]">Novo</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-sm text-[10px]">Exames</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<img class="w-6 h-6 rounded-full border border-primary-container object-cover" data-alt="A small circular thumbnail of a man's face, smiling, used for a mobile profile navigation icon. The lighting is high-key and professional." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeRX6gR5C5YzmCkVXWALiQldyMYJ9RTxjb9RojaCz8sZn-XwTAFJDN2p3xIDLo6GOXXmmor-WsxPyRmJXbogelWUouZj4hUsqeS2KJHre2oxihKDByIz2FrlnMvxiDu6xalDbqJPwlvqYzCYdLPHnpdAWbdWIb_b0GDAn2f_mhoY4uiCsNzYX4UVZjaYjV-_F_0H8rYAPl04uGTT-Djj39DFNlFKAxGDCgPF91_Nwoodk2DUkp74GD-Q"/>
+<span class="font-label-sm text-[10px]">Perfil</span>
+</a>
+</nav>
+<script>
+        // Simple interaction for mobile menu toggle (demo only)
+        document.querySelector('button.md\\:hidden').addEventListener('click', () => {
+            alert('Menu lateral em desenvolvimento para versão mobile.');
+        });
+    </script>
+</body></html>
